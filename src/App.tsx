@@ -2,6 +2,7 @@ import Text from "./components/Text";
 import TrashIcon from "./assets/icons/trash.svg?react";
 import Icon from "./components/Icon";
 import Badge from "./components/Badge";
+import Button from "./components/Button";
 
 export default function App() {
 	return (
@@ -14,6 +15,7 @@ export default function App() {
 				<Text variant="body-md-bold" className="text-gray-400">
 					Texto 3
 				</Text>
+				<Button icon={TrashIcon}> Nova Tarefa </Button>
 			</div>
 
 			<div className="flex gap-1">
