@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/a11y/useButtonType: <explanation> */
 import React from "react";
 import Icon from "./Icon";
 import { cva, type VariantProps } from "class-variance-authority";
