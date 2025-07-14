@@ -10,6 +10,7 @@ import InputText from "../components/InputText";
 import Skeleton from "../components/Skeleton";
 import Text from "../components/Text";
 import TrashIcon from "../assets/icons/trash.svg?react";
+import SpinnerIcon from "../assets/icons/spinner.svg?react";
 
 export default function PageComponents() {
 	return (
@@ -24,6 +25,10 @@ export default function PageComponents() {
 						Texto 3
 					</Text>
 					<Button icon={TrashIcon}> Nova Tarefa </Button>
+					<Button icon={SpinnerIcon} handling>
+						{" "}
+						Carregando{" "}
+					</Button>
 				</div>
 
 				<div className="flex gap-1">
@@ -48,6 +53,7 @@ export default function PageComponents() {
 					<ButtonIcon variant="secondary" icon={TrashIcon} />
 					<ButtonIcon variant="tertiary" icon={TrashIcon} />
 					<ButtonIcon loading icon={TrashIcon} />
+					<ButtonIcon icon={TrashIcon} handling />
 				</div>
 
 				<div className="bg-white">
