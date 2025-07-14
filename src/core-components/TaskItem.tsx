@@ -22,10 +22,21 @@ export default function TaskItem({ task }: TaskItemProps) {
 	);
 
 	const [taskTitle, setTaskTitle] = React.useState(task?.title || "");
-	const { updateTask } = useTask();
+	const { updateTask, updateTaskStatus, deleteTask } = useTask();
 
 	function handleEditTask() {
 		setIsEditing(true);
+	}
+
+	function handleCancelEditTask() {
+		if (task.state === TaskState.Creating) {
+			deleteTask(task.id);
+		}
+		setIsEditing(false);
+	}
+
+	function handleChangeTaskTitle(e: React.ChangeEvent<HTMLInputElement>) {
+		setTaskTitle(e.target.value || "");
 	}
 
 	function handleSaveTask(e: React.FormEvent<HTMLFormElement>) {
@@ -34,12 +45,13 @@ export default function TaskItem({ task }: TaskItemProps) {
 		setIsEditing(false);
 	}
 
-	function handleCancelEditTask() {
-		setIsEditing(false);
+	function handleChangeTaskStatus(e: React.ChangeEvent<HTMLInputElement>) {
+		const checked = e.target.checked;
+		updateTaskStatus(task.id, checked);
 	}
 
-	function handleChangeTaskTitle(e: React.ChangeEvent<HTMLInputElement>) {
-		setTaskTitle(e.target.value || "");
+	function handleDeleteTask() {
+		deleteTask(task.id);
 	}
 
 	return (
@@ -69,8 +81,8 @@ export default function TaskItem({ task }: TaskItemProps) {
 			) : (
 				<div className="my-2 flex items-center gap-4">
 					<InputCheckbox
-						value={task?.concluded?.toString()}
 						checked={task?.concluded}
+						onChange={handleChangeTaskStatus}
 					/>
 					<Text
 						className={cx("flex-1", {
@@ -80,7 +92,11 @@ export default function TaskItem({ task }: TaskItemProps) {
 						{task?.title}
 					</Text>
 					<div className="flex gap-1">
-						<ButtonIcon variant="tertiary" icon={TrashIcon} />
+						<ButtonIcon
+							onClick={handleDeleteTask}
+							variant="tertiary"
+							icon={TrashIcon}
+						/>
 						<ButtonIcon
 							variant="tertiary"
 							icon={PencilIcon}
